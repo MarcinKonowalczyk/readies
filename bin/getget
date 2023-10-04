@@ -48,6 +48,8 @@ if is_command apt-get; then
 	runn apt-get update -qq
 	packs=${packs/xz/xz-utils}
 	runn apt-get install --fix-missing -y $packs
+elif is_command tdnf; then
+	runn tdnf install -y $packs
 elif is_command dnf; then
 	runn dnf install -y $packs
 elif is_command yum; then

@@ -196,7 +196,7 @@ prepare_package_manager() {
 	if is_command apt-get; then
 		runn $SUDO apt-get -qq update --fix-missing
 	elif is_command yum; then
-		if [[ $os != fedora ]]; then
+		if [[ $os != fedora && $os != mariner ]]; then
 			runn $SUDO $READIES/bin/getepel
 		fi
 	elif is_command apk; then
@@ -223,6 +223,10 @@ install_python() {
 	elif [[ $osver == debian9 && $arch == x86_64 ]]; then
 		FORCE_MODERN=1
 	fi
+
+	if [[ $osver == mariner2.0 ]]; then
+		runn $SUDO tdnf install -y awk
+	fi
 	
 	prepare_package_manager
 
@@ -233,6 +237,8 @@ install_python() {
 
 	if is_command apt-get; then
 		runn $SUDO apt-get install --fix-missing -y python3
+	elif is_command tdnf; then
+		runn $SUDO tdnf install -y python3
 	elif is_command dnf; then
 		runn $SUDO dnf install -y python3
 	elif is_command yum; then
@@ -297,6 +303,8 @@ install_pip() {
 		runn @ <<-EOF
 			$SUDO apt-get install --fix-missing -y python3-distutils || $SUDO apt-get install --fix-missing -y python3-distutils-extra
 			EOF
+	elif is_command tdnf; then
+		runn $SUDO tdnf install -y $packs
 	elif is_command dnf; then
 		runn $SUDO dnf install -y $packs
 	elif is_command yum; then

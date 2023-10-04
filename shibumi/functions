@@ -239,6 +239,8 @@ xinstall() {
 		export DEBIAN_FRONTEND=noninteractive
 		[[ $NO_UPDATE != 1 ]] && runn $SUDO apt-get update -qq
 		runn $SUDO apt-get install --fix-missing -y "$packs"
+	elif is_command tdnf; then
+		runn $SUDO tdnf install -y "$packs"
 	elif is_command dnf; then
 		runn $SUDO dnf install -y "$packs"
 	elif is_command yum; then

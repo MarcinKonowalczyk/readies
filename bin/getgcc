@@ -93,6 +93,9 @@ class SystemSetup(paella.Setup):
     def fedora(self):
         self.group_install("'C Development Tools and Libraries'")
 
+    def mariner(self):
+        self.install("gcc")
+
     def archlinux(self):
         self.install("gcc")
 

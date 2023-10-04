@@ -125,6 +125,10 @@ class CLangSetup(paella.Setup):
         if self.modern:
             self.install("clang")
 
+    def mariner(self):
+        if self.modern:
+            self.install("clang")
+
     def macos(self):
         # self.install_latest_from_github()
         self.install("llvm@16")

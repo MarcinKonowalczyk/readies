@@ -15,6 +15,9 @@ if is_command apt-get; then
 	runn apt-get update -qq --fix-missing
 	runn apt-get upgrade -yqq
 	runn rm -rf /var/cache/apt
+elif is_command tdnf; then
+	runn tdnf update -y
+	runn rm -rf /var/cache/tdnf
 elif is_command dnf; then
 	if [[ $DIST == centos8 && $DIST_NAME != "CentOS Stream" ]]; then
 		sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-Linux-* &> /dev/null || true
