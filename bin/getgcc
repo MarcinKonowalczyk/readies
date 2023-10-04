@@ -94,7 +94,7 @@ class SystemSetup(paella.Setup):
         self.group_install("'C Development Tools and Libraries'")
 
     def mariner(self):
-        self.install("gcc")
+        self.install("build-essential")
 
     def archlinux(self):
         self.install("gcc")
